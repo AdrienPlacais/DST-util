@@ -72,7 +72,8 @@ def _wrapper_distrib(
 def plot_acceptance(
     filepath_acceptance: Path,
     filepath_density: Path | None = None,
-    bins: int = 500,
+    bins_acceptance: int = 200,
+    bins_density: int = 500,
     save_hist_data: bool = False,
     plot_single_kwargs: dict[tuple[str, str], dict[str, Any]] | None = None,
 ) -> Any:
@@ -94,7 +95,7 @@ def plot_acceptance(
         plot_single_kwargs,
         fig,
         axes,
-        bins=200,
+        bins=bins_acceptance,
         save_hist_data=save_hist_data,
     )
     if filepath_density is None:
@@ -116,7 +117,7 @@ def plot_acceptance(
         plot_single_kwargs,
         fig,
         axes,
-        bins=bins,
+        bins=bins_density,
         save_hist_data=save_hist_data,
     )
 
