@@ -9,20 +9,27 @@ from matplotlib.axes import Axes
 from matplotlib.colors import Colormap, ListedColormap
 
 
-def plot_same_acceptance_four_times(
+def plot_all_acceptances(
     data: pd.DataFrame,
     plot_single_kwargs: dict[tuple[str, str], dict[str, Any]],
     axes: Any,
     bins: int,
+    invert_acceptance_colors: bool = False,
 ) -> Any:
     """Plot all the desired acceptances."""
-    columns = list(plot_single_kwargs.keys())[0]
-    kwargs = list(plot_single_kwargs.values())[0]
-    acceptance_data = [
+    cmap = ListedColormap(["black", "white"])
+    if invert_acceptance_colors:
+        cmap = ListedColormap(["white", "black"])
+    hist_data = [
         _plot_single_acceptance(axis, data, columns, bins=bins, **kwargs)
-        for axis in axes.flatten()
+        for axis, columns, kwargs in zip(
+            axes.flatten(),
+            plot_single_kwargs.keys(),
+            plot_single_kwargs.values(),
+            strict=True,
+        )
     ]
-    return acceptance_data
+    return hist_data
 
 
 def _plot_single_acceptance(

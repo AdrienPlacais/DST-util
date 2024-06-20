@@ -16,7 +16,7 @@ class DSTUtilApp(tk.Tk):
         super().__init__()
 
         self.title("DST Util GUI")
-        self.geometry("600x400")
+        self.geometry("1200x800")
 
         self.notebook = ttk.Notebook(self)
         self.notebook.pack(expand=True, fill="both")
@@ -82,6 +82,26 @@ class DSTUtilApp(tk.Tk):
         )
         bins_density_entry.grid(row=3, column=1, padx=10, pady=10)
 
+        # Save histogram data checkbox
+        self.save_hist_data_acceptance = tk.BooleanVar(value=False)
+        save_hist_checkbox_acceptance = ttk.Checkbutton(
+            acceptance_frame,
+            text="Save histogram data",
+            variable=self.save_hist_data_acceptance,
+        )
+        save_hist_checkbox_acceptance.grid(
+            row=4, column=0, columnspan=2, padx=10, pady=10
+        )
+
+        # Invert acceptance colors checkbox
+        self.invert_acceptance_colors = tk.BooleanVar(value=False)
+        invert_colors_checkbox = ttk.Checkbutton(
+            acceptance_frame,
+            text="Invert acceptance colors",
+            variable=self.invert_acceptance_colors,
+        )
+        invert_colors_checkbox.grid(row=5, column=0, columnspan=2, padx=10, pady=10)
+
         # Plot kwargs (xlim and ylim for subplots)
         self.plot_kwargs_acceptance = {
             ("x(mm)", "x'(mrad)"): {
@@ -95,8 +115,8 @@ class DSTUtilApp(tk.Tk):
                 "additional": tk.StringVar(value=""),
             },
             ("Phase(deg)", "Energy(MeV)"): {
-                "xlim": tk.StringVar(value="-15, 15"),
-                "ylim": tk.StringVar(value="98, 100.5"),
+                "xlim": tk.StringVar(value="-20, 20"),
+                "ylim": tk.StringVar(value="16, 17"),
                 "additional": tk.StringVar(value="range='as_plot_limits'"),
             },
             ("x(mm)", "y(mm)"): {
@@ -106,7 +126,7 @@ class DSTUtilApp(tk.Tk):
             },
         }
 
-        row_offset = 4
+        row_offset = 6
         for i, ((x_label, y_label), kwargs) in enumerate(
             self.plot_kwargs_acceptance.items()
         ):
@@ -298,6 +318,9 @@ class DSTUtilApp(tk.Tk):
         bins_acceptance = self.bins_acceptance.get()
         bins_density = self.bins_density.get()
 
+        save_hist_data = self.save_hist_data.get()
+        invert_acceptance_colors = self.invert_acceptance_colors.get()
+
         # Parse plot_single_kwargs
         plot_single_kwargs = {}
         for (x_label, y_label), kwargs in self.plot_kwargs_acceptance.items():
@@ -327,6 +350,8 @@ class DSTUtilApp(tk.Tk):
                 bins_acceptance=bins_acceptance,
                 bins_density=bins_density,
                 plot_single_kwargs=plot_single_kwargs,
+                save_hist_data=save_hist_data,
+                invert_acceptance_colors=invert_acceptance_colors,
             )
             plt.show()
         except Exception as e:

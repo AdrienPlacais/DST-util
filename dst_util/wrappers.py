@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 
-from dst_util.acceptance import plot_same_acceptance_four_times
+from dst_util.acceptance import plot_all_acceptances
 from dst_util.distribution import plot_all_distributions
 from dst_util.dst_helper import (
     is_binary,
@@ -76,12 +76,15 @@ def plot_acceptance(
     bins_density: int = 500,
     save_hist_data: bool = False,
     plot_single_kwargs: dict[tuple[str, str], dict[str, Any]] | None = None,
+    invert_acceptance_colors: bool = False,
 ) -> Any:
     """Plot density and/or acceptance on the same figure."""
     fig, axes = plt.subplots(nrows=2, ncols=2)
 
     if plot_single_kwargs is None:
         plot_single_kwargs = {
+            ("x(mm)", "x'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
+            ("y(mm)", "y'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
             ("Phase(deg)", "Energy(MeV)"): {
                 # "xlim": (-15, 15),
                 # "ylim": (98, 100.5),
@@ -89,6 +92,7 @@ def plot_acceptance(
                 "ylim": (14, 19),
                 "range": "as_plot_limits",
             },
+            ("x(mm)", "y(mm)"): {"xlim": (-40.0, 40.0), "ylim": (-40.0, 40.0)},
         }
     _wrapper_acceptance(
         filepath_acceptance,
@@ -97,21 +101,10 @@ def plot_acceptance(
         axes,
         bins=bins_acceptance,
         save_hist_data=save_hist_data,
+        invert_acceptance_colors=invert_acceptance_colors,
     )
     if filepath_density is None:
         return
-    plot_single_kwargs = {
-        ("x(mm)", "x'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
-        ("y(mm)", "y'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
-        ("Phase(deg)", "Energy(MeV)"): {
-            # "xlim": (-15, 15),
-            # "ylim": (98, 100.5),
-            "xlim": (-30, 30),
-            "ylim": (14, 19),
-            "range": "as_plot_limits",
-        },
-        ("x(mm)", "y(mm)"): {"xlim": (-40.0, 40.0), "ylim": (-40.0, 40.0)},
-    }
     _wrapper_distrib(
         filepath_density,
         plot_single_kwargs,
@@ -129,14 +122,19 @@ def _wrapper_acceptance(
     axes: Axes,
     bins: int = 500,
     save_hist_data: bool = True,
+    invert_acceptance_colors: bool = False,
 ) -> Any:
     """Plot acceptance in x-x', y-y', phi-W and x-y phase spaces."""
     if is_binary(filepath):
         raise NotImplementedError
 
     data = read(filepath)
-    acceptance_data = plot_same_acceptance_four_times(
-        data, plot_single_kwargs, axes, bins=bins
+    acceptance_data = plot_all_acceptances(
+        data,
+        plot_single_kwargs,
+        axes,
+        bins=bins,
+        invert_acceptance_colors=invert_acceptance_colors,
     )
 
     save_figure(fig, filepath)

@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 import matplotlib.pyplot as plt
-from acceptance import plot_same_acceptance_four_times
+from acceptance import plot_all_acceptances
 from distribution import plot_all_distributions
 from dst_helper import (
     is_binary,

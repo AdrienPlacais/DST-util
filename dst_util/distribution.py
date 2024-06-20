@@ -13,6 +13,25 @@ from matplotlib.colors import Colormap, Normalize
 from matplotlib.figure import Figure
 
 
+def plot_all_distributions(
+    data: pd.DataFrame,
+    plot_single_kwargs: dict[tuple[str, str], dict[str, Any]],
+    axes: Any,
+    bins: int,
+) -> list[tuple[np.ndarray, np.ndarray, np.ndarray]]:
+    """Plot all the desired distributions."""
+    hist_data = [
+        _plot_single_distribution(axis, data, columns, bins=bins, **kwargs)
+        for axis, columns, kwargs in zip(
+            axes.flatten(),
+            plot_single_kwargs.keys(),
+            plot_single_kwargs.values(),
+            strict=True,
+        )
+    ]
+    return hist_data
+
+
 def _plot_single_distribution(
     axis: Axes,
     data: pd.DataFrame,
@@ -82,22 +101,3 @@ def save_all_distributions(
         filepath = original_filepath.with_stem(name).with_suffix(".csv")
         _save_single_distribution(filepath, *data)
     fig.savefig(original_filepath.with_suffix(".png"))
-
-
-def plot_all_distributions(
-    data: pd.DataFrame,
-    plot_single_kwargs: dict[tuple[str, str], dict[str, Any]],
-    axes: Any,
-    bins: int,
-) -> list[tuple[np.ndarray, np.ndarray, np.ndarray]]:
-    """Plot all the desired distributions."""
-    hist_data = [
-        _plot_single_distribution(axis, data, columns, bins=bins, **kwargs)
-        for axis, columns, kwargs in zip(
-            axes.flatten(),
-            plot_single_kwargs.keys(),
-            plot_single_kwargs.values(),
-            strict=True,
-        )
-    ]
-    return hist_data
