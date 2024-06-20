@@ -3,6 +3,7 @@
 from pathlib import Path
 from typing import Any
 
+import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 
@@ -17,7 +18,37 @@ from dst_util.dst_helper import (
 )
 
 
-def wrapper_distrib(
+def plot_distribution(
+    filepath_density: Path,
+    bins: int = 500,
+    save_hist_data: bool = False,
+    plot_single_kwargs: dict[tuple[str, str], dict[str, Any]] | None = None,
+) -> Any:
+    """Plot density and/or acceptance on the same figure."""
+    fig, axes = plt.subplots(nrows=2, ncols=2)
+
+    if plot_single_kwargs is None:
+        plot_single_kwargs = {
+            ("x(mm)", "x'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
+            ("y(mm)", "y'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
+            ("Phase(deg)", "Energy(MeV)"): {
+                "xlim": (-15, 15),
+                "ylim": (98, 100.5),
+                "range": "as_plot_limits",
+            },
+            ("x(mm)", "y(mm)"): {"xlim": (-40.0, 40.0), "ylim": (-40.0, 40.0)},
+        }
+    _wrapper_distrib(
+        filepath_density,
+        plot_single_kwargs,
+        fig,
+        axes,
+        bins=bins,
+        save_hist_data=save_hist_data,
+    )
+
+
+def _wrapper_distrib(
     filepath: Path,
     plot_single_kwargs: dict,
     fig: Figure,
@@ -38,7 +69,59 @@ def wrapper_distrib(
     return hist_data
 
 
-def wrapper_acceptance(
+def plot_acceptance(
+    filepath_acceptance: Path,
+    filepath_density: Path | None = None,
+    bins: int = 500,
+    save_hist_data: bool = False,
+    plot_single_kwargs: dict[tuple[str, str], dict[str, Any]] | None = None,
+) -> Any:
+    """Plot density and/or acceptance on the same figure."""
+    fig, axes = plt.subplots(nrows=2, ncols=2)
+
+    if plot_single_kwargs is None:
+        plot_single_kwargs = {
+            ("Phase(deg)", "Energy(MeV)"): {
+                # "xlim": (-15, 15),
+                # "ylim": (98, 100.5),
+                "xlim": (-30, 30),
+                "ylim": (14, 19),
+                "range": "as_plot_limits",
+            },
+        }
+    _wrapper_acceptance(
+        filepath_acceptance,
+        plot_single_kwargs,
+        fig,
+        axes,
+        bins=200,
+        save_hist_data=save_hist_data,
+    )
+    if filepath_density is None:
+        return
+    plot_single_kwargs = {
+        ("x(mm)", "x'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
+        ("y(mm)", "y'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
+        ("Phase(deg)", "Energy(MeV)"): {
+            # "xlim": (-15, 15),
+            # "ylim": (98, 100.5),
+            "xlim": (-30, 30),
+            "ylim": (14, 19),
+            "range": "as_plot_limits",
+        },
+        ("x(mm)", "y(mm)"): {"xlim": (-40.0, 40.0), "ylim": (-40.0, 40.0)},
+    }
+    _wrapper_distrib(
+        filepath_density,
+        plot_single_kwargs,
+        fig,
+        axes,
+        bins=bins,
+        save_hist_data=save_hist_data,
+    )
+
+
+def _wrapper_acceptance(
     filepath: Path,
     plot_single_kwargs: dict,
     fig: Figure,

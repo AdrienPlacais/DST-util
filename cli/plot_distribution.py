@@ -2,41 +2,8 @@
 """Provide a CLI to plot distribution."""
 import argparse
 from pathlib import Path
-from typing import Any
 
-import matplotlib.pyplot as plt
-
-from dst_util.wrappers import wrapper_distrib
-
-
-def plot(
-    filepath_density: Path,
-    bins: int = 500,
-    save_hist_data: bool = False,
-    plot_single_kwargs: dict[tuple[str, str], dict[str, Any]] | None = None,
-) -> Any:
-    """Plot density and/or acceptance on the same figure."""
-    fig, axes = plt.subplots(nrows=2, ncols=2)
-
-    if plot_single_kwargs is None:
-        plot_single_kwargs = {
-            ("x(mm)", "x'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
-            ("y(mm)", "y'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
-            ("Phase(deg)", "Energy(MeV)"): {
-                "xlim": (-15, 15),
-                "ylim": (98, 100.5),
-                "range": "as_plot_limits",
-            },
-            ("x(mm)", "y(mm)"): {"xlim": (-40.0, 40.0), "ylim": (-40.0, 40.0)},
-        }
-    wrapper_distrib(
-        filepath_density,
-        plot_single_kwargs,
-        fig,
-        axes,
-        bins=bins,
-        save_hist_data=save_hist_data,
-    )
+from dst_util.wrappers import plot_distribution
 
 
 def main():
@@ -64,7 +31,7 @@ def main():
         action="store_false",
     )
     args = parser.parse_args()
-    plot(Path(args.density), args.bins, args.save)
+    plot_distribution(Path(args.density), args.bins, args.save)
 
 
 if __name__ == "__main__":
