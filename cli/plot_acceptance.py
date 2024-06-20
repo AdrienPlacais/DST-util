@@ -35,7 +35,7 @@ def plot(
         fig,
         axes,
         bins=200,
-        save=save_hist_data,
+        save_hist_data=save_hist_data,
     )
     if filepath_density is None:
         return
@@ -52,7 +52,12 @@ def plot(
         ("x(mm)", "y(mm)"): {"xlim": (-40.0, 40.0), "ylim": (-40.0, 40.0)},
     }
     wrapper_distrib(
-        filepath_density, plot_single_kwargs, fig, axes, bins=bins, save=save_hist_data
+        filepath_density,
+        plot_single_kwargs,
+        fig,
+        axes,
+        bins=bins,
+        save_hist_data=save_hist_data,
     )
 
 

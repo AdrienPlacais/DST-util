@@ -3,17 +3,18 @@
 from pathlib import Path
 from typing import Any
 
-from acceptance import plot_same_acceptance_four_times
-from distribution import plot_all_distributions
-from dst_helper import (
+from matplotlib.axes import Axes
+from matplotlib.figure import Figure
+
+from dst_util.acceptance import plot_same_acceptance_four_times
+from dst_util.distribution import plot_all_distributions
+from dst_util.dst_helper import (
     is_binary,
     read,
     save_all_acceptances,
     save_all_distributions,
     save_figure,
 )
-from matplotlib.axes import Axes
-from matplotlib.figure import Figure
 
 
 def wrapper_distrib(
