@@ -24,7 +24,8 @@ class DSTUtilApp(tk.Tk):
         self.create_acceptance_tab()
         self.create_distribution_tab()
 
-    def create_acceptance_tab(self):
+    def create_acceptance_tab(self) -> None:
+        """Define the first tab, to plot acceptances."""
         acceptance_frame = ttk.Frame(self.notebook)
         self.notebook.add(acceptance_frame, text="Acceptance")
 
@@ -46,7 +47,7 @@ class DSTUtilApp(tk.Tk):
         file_acceptance_button.grid(row=0, column=2, padx=10, pady=10)
 
         # Filepath density (optional)
-        self.filepath_density = tk.StringVar(
+        self.filepath_density_acc = tk.StringVar(
             value="/home/placais/Documents/Conferences/2024.08_LINAC2024/presentation/data/dtl_minerva/in.txt"
         )
         file_density_label = ttk.Label(
@@ -54,13 +55,13 @@ class DSTUtilApp(tk.Tk):
         )
         file_density_label.grid(row=1, column=0, padx=10, pady=10)
         file_density_entry = ttk.Entry(
-            acceptance_frame, textvariable=self.filepath_density, width=40
+            acceptance_frame, textvariable=self.filepath_density_acc, width=40
         )
         file_density_entry.grid(row=1, column=1, padx=10, pady=10)
         file_density_button = ttk.Button(
             acceptance_frame,
             text="Browse",
-            command=lambda: self.browse_file(self.filepath_density),
+            command=lambda: self.browse_file(self.filepath_density_acc),
         )
         file_density_button.grid(row=1, column=2, padx=10, pady=10)
 
@@ -174,13 +175,13 @@ class DSTUtilApp(tk.Tk):
         self.notebook.add(distribution_frame, text="Distribution")
 
         # File selection
-        self.filepath_distribution = tk.StringVar(
+        self.filepath_density = tk.StringVar(
             value="/home/placais/Documents/Conferences/2024.08_LINAC2024/presentation/data/dtl_minerva/failed_14/out.txt"
         )
         file_label = ttk.Label(distribution_frame, text="File to plot:")
         file_label.grid(row=0, column=0, padx=10, pady=10)
         file_entry = ttk.Entry(
-            distribution_frame, textvariable=self.filepath_distribution, width=40
+            distribution_frame, textvariable=self.filepath_density, width=40
         )
         file_entry.grid(row=0, column=1, padx=10, pady=10)
         file_button = ttk.Button(
@@ -268,13 +269,15 @@ class DSTUtilApp(tk.Tk):
             pady=10,
         )
 
-    def browse_file(self, path_var):
+    def browse_file(self, path_var) -> None:
+        """Open the filedialog and set the ``path_var``."""
         file_path = filedialog.askopenfilename()
         if file_path:
             path_var.set(file_path)
 
-    def plot_distribution(self):
-        filepath_distribution = self.filepath_distribution.get()
+    def plot_distribution(self) -> None:
+        """Plot the density."""
+        filepath_density = self.filepath_density.get()
         bins = self.bins.get()
         save_hist_data = self.save_hist_data.get()
 
@@ -294,13 +297,13 @@ class DSTUtilApp(tk.Tk):
 
             plot_single_kwargs[(x_label, y_label)] = plot_kwargs_entry
 
-        if not filepath_distribution:
+        if not filepath_density:
             messagebox.showerror("Error", "Please select a file to plot.")
             return
 
         try:
             plot_distribution(
-                filepath_density=Path(filepath_distribution),
+                filepath_density=Path(filepath_density),
                 bins=bins,
                 save_hist_data=save_hist_data,
                 plot_single_kwargs=plot_single_kwargs,
@@ -313,7 +316,9 @@ class DSTUtilApp(tk.Tk):
         """Plot the acceptance."""
         filepath_acceptance = Path(self.filepath_acceptance.get())
         filepath_density = (
-            Path(self.filepath_density.get()) if self.filepath_density.get() else None
+            Path(self.filepath_density_acc.get())
+            if self.filepath_density_acc.get()
+            else None
         )
         bins_acceptance = self.bins_acceptance.get()
         bins_density = self.bins_density.get()
