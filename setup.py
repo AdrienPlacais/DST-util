@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="dst_util",
-    version="0.0.1",
+    version="0.0.2",
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
@@ -15,6 +15,7 @@ setup(
         "console_scripts": [
             "plot_acceptance-cli=cli.plot_acceptance:main",
             "plot_distribution-cli=cli.plot_distribution:main",
+            "dst_util-gui=gui.gui:main",
         ],
     },
     author="Adrien Plaçais",

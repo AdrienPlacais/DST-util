@@ -358,6 +358,11 @@ class DSTUtilApp(tk.Tk):
             messagebox.showerror("Error", str(e))
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Create the interactive window."""
     app = DSTUtilApp()
     app.mainloop()
+
+
+if __name__ == "__main__":
+    main()
