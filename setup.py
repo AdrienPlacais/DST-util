@@ -5,12 +5,7 @@ setup(
     version="0.0.2",
     packages=find_packages(),
     include_package_data=True,
-    install_requires=[
-        "matplotlib",
-        "numpy",
-        "pandas",
-        "setuptools",
-    ],
+    install_requires=["matplotlib", "numpy", "pandas", "setuptools"],
     entry_points={
         "console_scripts": [
             "plot_acceptance-cli=cli.plot_acceptance:main",
