@@ -21,7 +21,7 @@ def plot_all_acceptances(
     if invert_acceptance_colors:
         cmap = ListedColormap(["white", "black"])
     hist_data = [
-        _plot_single_acceptance(axis, data, columns, bins=bins, **kwargs)
+        _plot_single_acceptance(axis, data, columns, bins=bins, cmap=cmap, **kwargs)
         for axis, columns, kwargs in zip(
             axes.flatten(),
             plot_single_kwargs.keys(),
