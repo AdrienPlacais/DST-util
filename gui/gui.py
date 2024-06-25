@@ -33,7 +33,9 @@ class DSTUtilApp(tk.Tk):
         self.filepath_acceptance = tk.StringVar(
             value="/home/placais/Documents/Conferences/2024.08_LINAC2024/presentation/data/dtl_minerva/failed_14/accepted.txt"
         )
-        file_acceptance_label = ttk.Label(acceptance_frame, text="Filepath Acceptance:")
+        file_acceptance_label = ttk.Label(
+            acceptance_frame, text="Filepath Acceptance:"
+        )
         file_acceptance_label.grid(row=0, column=0, padx=10, pady=10)
         file_acceptance_entry = ttk.Entry(
             acceptance_frame, textvariable=self.filepath_acceptance, width=40
@@ -67,7 +69,9 @@ class DSTUtilApp(tk.Tk):
 
         # Bins acceptance
         self.bins_acceptance = tk.IntVar(value=200)
-        bins_acceptance_label = ttk.Label(acceptance_frame, text="Bins Acceptance:")
+        bins_acceptance_label = ttk.Label(
+            acceptance_frame, text="Bins Acceptance:"
+        )
         bins_acceptance_label.grid(row=2, column=0, padx=10, pady=10)
         bins_acceptance_entry = ttk.Entry(
             acceptance_frame, textvariable=self.bins_acceptance, width=10
@@ -101,7 +105,9 @@ class DSTUtilApp(tk.Tk):
             text="Invert acceptance colors",
             variable=self.invert_acceptance_colors,
         )
-        invert_colors_checkbox.grid(row=5, column=0, columnspan=2, padx=10, pady=10)
+        invert_colors_checkbox.grid(
+            row=5, column=0, columnspan=2, padx=10, pady=10
+        )
 
         # Plot kwargs (xlim and ylim for subplots)
         self.plot_kwargs_acceptance = {
@@ -135,17 +141,26 @@ class DSTUtilApp(tk.Tk):
                 acceptance_frame, text=f"{x_label} vs {y_label}"
             )
             label_frame.grid(
-                row=row_offset + i, column=0, columnspan=3, padx=10, pady=5, sticky="ew"
+                row=row_offset + i,
+                column=0,
+                columnspan=3,
+                padx=10,
+                pady=5,
+                sticky="ew",
             )
 
             xlim_label = ttk.Label(label_frame, text="xlim:")
             xlim_label.grid(row=0, column=0, padx=5, pady=5)
-            xlim_entry = ttk.Entry(label_frame, textvariable=kwargs["xlim"], width=20)
+            xlim_entry = ttk.Entry(
+                label_frame, textvariable=kwargs["xlim"], width=20
+            )
             xlim_entry.grid(row=0, column=1, padx=5, pady=5)
 
             ylim_label = ttk.Label(label_frame, text="ylim:")
             ylim_label.grid(row=0, column=2, padx=5, pady=5)
-            ylim_entry = ttk.Entry(label_frame, textvariable=kwargs["ylim"], width=20)
+            ylim_entry = ttk.Entry(
+                label_frame, textvariable=kwargs["ylim"], width=20
+            )
             ylim_entry.grid(row=0, column=3, padx=5, pady=5)
 
             additional_kwargs_label = ttk.Label(
@@ -155,7 +170,9 @@ class DSTUtilApp(tk.Tk):
             additional_kwargs_entry = ttk.Entry(
                 label_frame, textvariable=kwargs["additional"], width=40
             )
-            additional_kwargs_entry.grid(row=1, column=1, columnspan=3, padx=5, pady=5)
+            additional_kwargs_entry.grid(
+                row=1, column=1, columnspan=3, padx=5, pady=5
+            )
 
         # Plot button
         plot_button = ttk.Button(
@@ -195,15 +212,21 @@ class DSTUtilApp(tk.Tk):
         self.bins = tk.IntVar(value=500)
         bins_label = ttk.Label(distribution_frame, text="Number of bins:")
         bins_label.grid(row=1, column=0, padx=10, pady=10)
-        bins_entry = ttk.Entry(distribution_frame, textvariable=self.bins, width=10)
+        bins_entry = ttk.Entry(
+            distribution_frame, textvariable=self.bins, width=10
+        )
         bins_entry.grid(row=1, column=1, padx=10, pady=10)
 
         # Save histogram data
         self.save_hist_data = tk.BooleanVar(value=False)
         save_hist_checkbox = ttk.Checkbutton(
-            distribution_frame, text="Save histogram data", variable=self.save_hist_data
+            distribution_frame,
+            text="Save histogram data",
+            variable=self.save_hist_data,
         )
-        save_hist_checkbox.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        save_hist_checkbox.grid(
+            row=2, column=0, columnspan=2, padx=10, pady=10
+        )
 
         # Plot kwargs (xlim and ylim for subplots)
         self.plot_kwargs = {
@@ -230,22 +253,33 @@ class DSTUtilApp(tk.Tk):
         }
 
         row_offset = 3
-        for i, ((x_label, y_label), kwargs) in enumerate(self.plot_kwargs.items()):
+        for i, ((x_label, y_label), kwargs) in enumerate(
+            self.plot_kwargs.items()
+        ):
             label_frame = ttk.LabelFrame(
                 distribution_frame, text=f"{x_label} vs {y_label}"
             )
             label_frame.grid(
-                row=row_offset + i, column=0, columnspan=3, padx=10, pady=5, sticky="ew"
+                row=row_offset + i,
+                column=0,
+                columnspan=3,
+                padx=10,
+                pady=5,
+                sticky="ew",
             )
 
             xlim_label = ttk.Label(label_frame, text="xlim:")
             xlim_label.grid(row=0, column=0, padx=5, pady=5)
-            xlim_entry = ttk.Entry(label_frame, textvariable=kwargs["xlim"], width=20)
+            xlim_entry = ttk.Entry(
+                label_frame, textvariable=kwargs["xlim"], width=20
+            )
             xlim_entry.grid(row=0, column=1, padx=5, pady=5)
 
             ylim_label = ttk.Label(label_frame, text="ylim:")
             ylim_label.grid(row=0, column=2, padx=5, pady=5)
-            ylim_entry = ttk.Entry(label_frame, textvariable=kwargs["ylim"], width=20)
+            ylim_entry = ttk.Entry(
+                label_frame, textvariable=kwargs["ylim"], width=20
+            )
             ylim_entry.grid(row=0, column=3, padx=5, pady=5)
 
             additional_kwargs_label = ttk.Label(
@@ -255,7 +289,9 @@ class DSTUtilApp(tk.Tk):
             additional_kwargs_entry = ttk.Entry(
                 label_frame, textvariable=kwargs["additional"], width=40
             )
-            additional_kwargs_entry.grid(row=1, column=1, columnspan=3, padx=5, pady=5)
+            additional_kwargs_entry.grid(
+                row=1, column=1, columnspan=3, padx=5, pady=5
+            )
 
         # Plot button
         plot_button = ttk.Button(
@@ -343,7 +379,9 @@ class DSTUtilApp(tk.Tk):
             plot_single_kwargs[(x_label, y_label)] = plot_kwargs_entry
 
         if not filepath_acceptance:
-            messagebox.showerror("Error", "Please select a file for acceptance.")
+            messagebox.showerror(
+                "Error", "Please select a file for acceptance."
+            )
             return
 
         try:

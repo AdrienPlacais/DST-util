@@ -30,7 +30,9 @@ def save_all_distributions(
 ) -> None:
     """Save distribution for pgfplots and figures."""
     for data, columns in zip(all_data, all_columns):
-        name = original_filepath.stem + "_" + "_".join(columns).replace(" ", "_")
+        name = (
+            original_filepath.stem + "_" + "_".join(columns).replace(" ", "_")
+        )
         filepath = original_filepath.with_stem(name).with_suffix(".csv")
         _save_single_hist(filepath, *data, add_log_column=True)
 

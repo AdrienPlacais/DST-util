@@ -82,7 +82,9 @@ def _save_single_distribution(
     data = []
     for i in range(len(xedges) - 1):
         for j in range(len(yedges) - 1):
-            data.append([xedges[i], yedges[j], hist[i, j], math.log10(hist[i, j])])
+            data.append(
+                [xedges[i], yedges[j], hist[i, j], math.log10(hist[i, j])]
+            )
 
     df = pd.DataFrame(data, columns=("x", "y", "z", "zlog"))
     df.to_csv(filepath, index=False, na_rep="nan", sep=" ")
@@ -97,7 +99,9 @@ def save_all_distributions(
 ) -> None:
     """Save distribution for pgfplots and figures."""
     for data, columns in zip(all_data, all_columns):
-        name = original_filepath.stem + "_" + "_".join(columns).replace(" ", "_")
+        name = (
+            original_filepath.stem + "_" + "_".join(columns).replace(" ", "_")
+        )
         filepath = original_filepath.with_stem(name).with_suffix(".csv")
         _save_single_distribution(filepath, *data)
     fig.savefig(original_filepath.with_suffix(".png"))

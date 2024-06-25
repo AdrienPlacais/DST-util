@@ -29,8 +29,14 @@ def plot_distribution(
 
     if plot_single_kwargs is None:
         plot_single_kwargs = {
-            ("x(mm)", "x'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
-            ("y(mm)", "y'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
+            ("x(mm)", "x'(mrad)"): {
+                "xlim": (-40.0, 40.0),
+                "ylim": (-25.0, 25.0),
+            },
+            ("y(mm)", "y'(mrad)"): {
+                "xlim": (-40.0, 40.0),
+                "ylim": (-25.0, 25.0),
+            },
             ("Phase(deg)", "Energy(MeV)"): {
                 "xlim": (-15, 15),
                 "ylim": (98, 100.5),
@@ -61,7 +67,9 @@ def _wrapper_distrib(
         raise NotImplementedError
     data = read(filepath)
 
-    hist_data = plot_all_distributions(data, plot_single_kwargs, axes, bins=bins)
+    hist_data = plot_all_distributions(
+        data, plot_single_kwargs, axes, bins=bins
+    )
 
     save_figure(fig, filepath)
     if save_hist_data:
@@ -83,8 +91,14 @@ def plot_acceptance(
 
     if plot_single_kwargs is None:
         plot_single_kwargs = {
-            ("x(mm)", "x'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
-            ("y(mm)", "y'(mrad)"): {"xlim": (-40.0, 40.0), "ylim": (-25.0, 25.0)},
+            ("x(mm)", "x'(mrad)"): {
+                "xlim": (-40.0, 40.0),
+                "ylim": (-25.0, 25.0),
+            },
+            ("y(mm)", "y'(mrad)"): {
+                "xlim": (-40.0, 40.0),
+                "ylim": (-25.0, 25.0),
+            },
             ("Phase(deg)", "Energy(MeV)"): {
                 # "xlim": (-15, 15),
                 # "ylim": (98, 100.5),
@@ -139,6 +153,8 @@ def _wrapper_acceptance(
 
     save_figure(fig, filepath)
     if save_hist_data:
-        save_all_acceptances(acceptance_data, plot_single_kwargs.keys(), filepath)
+        save_all_acceptances(
+            acceptance_data, plot_single_kwargs.keys(), filepath
+        )
 
     return acceptance_data
