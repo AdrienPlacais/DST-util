@@ -1,0 +1,22 @@
+[project]
+authors = [{ name = "Adrien Plaçais", email = "placais@lpsc.in2p3.fr" }]
+classifiers = [
+   "License :: OSI Approved :: MIT License",
+   "Operating System :: OS Independent",
+   "Programming Language :: Python :: 3",
+]
+description = "Set of utility to plot/save .dst files"
+name = "DST-util"
+readme = "README.md"
+requires-python = ">=3.12"
+version = "0.0.2"
+
+[project.urls]
+Homepage = "https://github.com/AdrienPlacais/DST-util"
+
+[tool.isort]
+profile = "black"
+src_paths = ["./dst_util"]
+
+[tool.black]
+line-length = 79
