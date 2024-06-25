@@ -31,7 +31,8 @@ class DSTUtilApp(tk.Tk):
 
         # Filepath acceptance (mandatory)
         self.filepath_acceptance = tk.StringVar(
-            value="/home/placais/Documents/Conferences/2024.08_LINAC2024/presentation/data/dtl_minerva/failed_14/accepted.txt"
+            value="/home/placais/Documents/Conferences/2024.08_LINAC2024/"
+            + "presentation/data/minerva/dtl/failed_22/accepted.txt"
         )
         file_acceptance_label = ttk.Label(
             acceptance_frame, text="Filepath Acceptance:"
@@ -50,7 +51,8 @@ class DSTUtilApp(tk.Tk):
 
         # Filepath density (optional)
         self.filepath_density_acc = tk.StringVar(
-            value="/home/placais/Documents/Conferences/2024.08_LINAC2024/presentation/data/dtl_minerva/in.txt"
+            value="/home/placais/Documents/Conferences/2024.08_LINAC2024/"
+            + "presentation/data/minerva/dtl/in.txt"
         )
         file_density_label = ttk.Label(
             acceptance_frame, text="Filepath Density (optional):"
@@ -79,7 +81,7 @@ class DSTUtilApp(tk.Tk):
         bins_acceptance_entry.grid(row=2, column=1, padx=10, pady=10)
 
         # Bins density
-        self.bins_density = tk.IntVar(value=500)
+        self.bins_density = tk.IntVar(value=350)
         bins_density_label = ttk.Label(acceptance_frame, text="Bins Density:")
         bins_density_label.grid(row=3, column=0, padx=10, pady=10)
         bins_density_entry = ttk.Entry(
@@ -193,7 +195,8 @@ class DSTUtilApp(tk.Tk):
 
         # File selection
         self.filepath_density = tk.StringVar(
-            value="/home/placais/Documents/Conferences/2024.08_LINAC2024/presentation/data/dtl_minerva/failed_14/out.txt"
+            value="/home/placais/Documents/Conferences/2024.08_LINAC2024/"
+            + "presentation/data/dtl_minerva/failed_14/out.txt"
         )
         file_label = ttk.Label(distribution_frame, text="File to plot:")
         file_label.grid(row=0, column=0, padx=10, pady=10)
@@ -209,7 +212,7 @@ class DSTUtilApp(tk.Tk):
         file_button.grid(row=0, column=2, padx=10, pady=10)
 
         # Number of bins
-        self.bins = tk.IntVar(value=500)
+        self.bins = tk.IntVar(value=350)
         bins_label = ttk.Label(distribution_frame, text="Number of bins:")
         bins_label.grid(row=1, column=0, padx=10, pady=10)
         bins_entry = ttk.Entry(
@@ -359,7 +362,7 @@ class DSTUtilApp(tk.Tk):
         bins_acceptance = self.bins_acceptance.get()
         bins_density = self.bins_density.get()
 
-        save_hist_data = self.save_hist_data.get()
+        save_hist_data = self.save_hist_data_acceptance.get()
         invert_acceptance_colors = self.invert_acceptance_colors.get()
 
         # Parse plot_single_kwargs
