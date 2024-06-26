@@ -196,7 +196,7 @@ class DSTUtilApp(tk.Tk):
         # File selection
         self.filepath_density = tk.StringVar(
             value="/home/placais/Documents/Conferences/2024.08_LINAC2024/"
-            + "presentation/data/dtl_minerva/failed_14/out.txt"
+            + "presentation/data/minerva/dtl/failed_14/out.txt"
         )
         file_label = ttk.Label(distribution_frame, text="File to plot:")
         file_label.grid(row=0, column=0, padx=10, pady=10)
