@@ -163,3 +163,4 @@ cython_debug/
 
 data/*
 dst_util_venv/*
+scripts/*
