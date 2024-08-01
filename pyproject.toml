@@ -1,15 +1,29 @@
 [project]
 authors = [{ name = "Adrien Plaçais", email = "placais@lpsc.in2p3.fr" }]
 classifiers = [
+   "Development Status :: 3 - Alpha",
+   "Intended Audience :: Science/Research",
    "License :: OSI Approved :: MIT License",
    "Operating System :: OS Independent",
    "Programming Language :: Python :: 3",
+   "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+   "matplotlib==3.8.4",
+   "numpy==2.0.0",
+   "pandas==2.2.2",
+   "setuptools==69.5.1",
 ]
 description = "Set of utility to plot/save .dst files"
 name = "DST-util"
 readme = "README.md"
 requires-python = ">=3.12"
 version = "0.0.2"
+
+[project.scripts]
+plot_acceptance = "dst_util.cli.plot_acceptance:main"
+plot_distribution = "dst_util.cli.plot_distribution:main"
+dst_util-gui = "dst_util.gui.gui:main"
 
 [project.urls]
 Homepage = "https://github.com/AdrienPlacais/DST-util"
@@ -20,3 +34,13 @@ src_paths = ["./dst_util"]
 
 [tool.black]
 line-length = 79
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages]
+find = { where = ["src"] }
+
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=42", "wheel"]
