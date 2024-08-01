@@ -1,7 +1,7 @@
 [project]
 authors = [{ name = "Adrien Plaçais", email = "placais@lpsc.in2p3.fr" }]
 classifiers = [
-   "Development Status :: 3 - Alpha",
+   "Development Status :: 4 - Beta",
    "Intended Audience :: Science/Research",
    "License :: OSI Approved :: MIT License",
    "Operating System :: OS Independent",
@@ -18,7 +18,7 @@ description = "Set of utility to plot/save .dst files"
 name = "DST-util"
 readme = "README.md"
 requires-python = ">=3.12"
-version = "0.0.2"
+version = "0.1.0"
 
 [project.scripts]
 plot_acceptance = "dst_util.cli.plot_acceptance:main"
