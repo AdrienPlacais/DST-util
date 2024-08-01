@@ -38,4 +38,4 @@ In the latter case, invert acceptance colors with the checkbox for clarity.
 
 ### Integration in LaTeX documents with pgfplots
 With the example `TikZ` file in the `tikz` folder, you can produce something like this.
-![acceptance-tikz](tikz/acceptance_tikz.pdf "Produced by pgfplots")
+![acceptance-tikz](images/acceptance_tikz.png "Produced by pgfplots")
