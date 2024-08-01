@@ -1,6 +1,6 @@
 # DST-util
 This small library offers tool to plot density files produced by TraceWin.
-Density files are converted so that plotting them with TikZ is easy.
+Density files are converted so that plotting them with TikZ/Pgfplot is easy.
 
 ## Installation
 1. Navigate to the directory where the code should be stored and run:
@@ -24,13 +24,14 @@ Note that `.dst` binary files are not supported.
 You should open your `.dst` with PlotWin and convert it to non-binary `.txt` format.
 
 ### Distribution
-![distribution-screenshot](images/distribution.png)
+![distribution-screenshot](images/distribution.png "Distribution plot in GUI")
 
 ### Acceptance
 You will need a file containing either the accepted particles, either the non-accepted particles.
-The TraceWin documentation explains how to produce such files; remember to save it as `.txt`!
-![acceptance-tracewin-screenshot](images/accepted_particles_in_tracewin.png "In TraceWin")
+The TraceWin documentation explains how to produce such files.
+Once you have your `accepted.dst` or `not_accepted.dst` file, reopen it with PlotWin to save it as `.txt`.
+![acceptance-tracewin-screenshot](images/accepted_particles_in_tracewin.png "Acceptance in TraceWin")
 
 You can provide accepted particles or non-accepted particles.
 In the latter case, invert acceptance colors with the checkbox for clarity.
-![acceptance-screenshot](images/acceptance.png)
+![acceptance-screenshot](images/acceptance.png "Acceptance plot in GUI")
