@@ -60,9 +60,9 @@ def _plot_single_acceptance(
         assert ylim is not None
         range = (xlim, ylim)
     h, xedges, yedges = np.histogram2d(x, y, bins=bins, range=range)
-    accepted_h = np.where(h > 0, 1, 0).T
+    accepted_h = np.where(h > 0, 1, 0)
 
-    axis.pcolormesh(xedges, yedges, accepted_h, cmap=cmap, edgecolors="face")
+    axis.pcolormesh(xedges, yedges, accepted_h.T, cmap=cmap, edgecolors="face")
     title = " - ".join(columns)
     axis.set_title(title)
     if grid:
