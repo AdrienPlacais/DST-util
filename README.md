@@ -35,3 +35,7 @@ Once you have your `accepted.dst` or `not_accepted.dst` file, reopen it with Plo
 You can provide accepted particles or non-accepted particles.
 In the latter case, invert acceptance colors with the checkbox for clarity.
 ![acceptance-screenshot](images/acceptance.png "Acceptance plot in GUI")
+
+### Integration in LaTeX documents with pgfplots
+With the example `TikZ` file in the `tikz` folder, you can produce something like this.
+![acceptance-tikz](tikz/acceptance-tikz.pdf "Produced by pgfplots")

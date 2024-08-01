@@ -1,0 +1,43 @@
+\documentclass[tikz]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\pgfplotsset{
+density plot/.style={%
+      width=.5\textwidth,
+      height=.5\textwidth,
+      xlabel near ticks,
+      ylabel near ticks,
+      enlargelimits=false,
+      scale only axis,
+      colormap/viridis,
+      xlabel={\( \Delta\phi \)},
+      ylabel={\( W_\mathrm{kin} \)}
+   }
+}
+\begin{document}
+\begin{tikzpicture}
+   \begin{axis}[
+         density plot,
+      ]
+      \pgfplotsset{colormap={whiteblack}{gray(0cm)=(1); gray(1cm)=(0)}};
+      \addplot[%
+         surf,
+         matrix plot*,
+         mesh/rows=200, % <- Must match the number
+         mesh/cols=200, %    of bins defined in GUI
+         point meta=explicit,
+      ] table[x=x, y=y,meta=z]{not_accepted_acceptance_Phase(deg)_Energy(MeV).csv}; % .csv as produced by dst-util
+
+      \addplot[%
+         surf,
+         matrix plot*,
+         mesh/rows=350, % <- Must match the number
+         mesh/cols=350, %    of bins defined in GUI
+         point meta=explicit,
+         colormap/viridis,
+      ] table[x=x, y=y,meta=zlog]{in_Phase(deg)_Energy(MeV).csv};
+
+   \end{axis}
+\end{tikzpicture}
+\end{document}
