@@ -1,18 +1,18 @@
 [project]
 authors = [{ name = "Adrien Plaçais", email = "placais@lpsc.in2p3.fr" }]
 classifiers = [
-   "Development Status :: 4 - Beta",
-   "Intended Audience :: Science/Research",
-   "License :: OSI Approved :: MIT License",
-   "Operating System :: OS Independent",
-   "Programming Language :: Python :: 3",
-   "Topic :: Scientific/Engineering :: Physics",
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Physics",
 ]
 dependencies = [
-   "matplotlib==3.8.4",
-   "numpy==2.0.0",
-   "pandas==2.2.2",
-   "setuptools==69.5.1",
+  "matplotlib>=3.10.8, <4",
+  "numpy>=2.4.2, <3",
+  "pandas>=3.0.1, <4",
+  "pandas-stubs>=3.0.0,<4",
 ]
 description = "Set of utility to plot/save .dst files"
 name = "DST-util"
@@ -43,4 +43,4 @@ find = { where = ["src"] }
 
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=64", "wheel"]
